@@ -1,0 +1,17 @@
+---
+- name: Manage Print Spooler Service
+  hosts: windows
+  gather_facts: true
+
+  tasks:
+    - name: Stop Print Spooler Service
+      win_service:
+        name: spooler
+        state: stopped
+  
+    - name: Start Print Spooler Service
+      win_service:
+        name: spooler
+        start_mode: auto
+        state: started 
+

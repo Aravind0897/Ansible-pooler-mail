@@ -1,0 +1,24 @@
+---
+- name: print variable value
+  hosts: localhost
+  vars:  
+   - gmail_password: !vault |
+          $ANSIBLE_VAULT;1.1;AES256
+          66323632366636653233633335653837363732386630346165306532313735646132343732616530
+          3236666664653437643362653364623937353039616338340a653432396133623662306436306333
+          64383437396666653230663739373065323131326635393365353837396334636132363332303732
+          3132653631353365350a663262656139393931373164343636653234313565663635306366663535
+          30666566633832666263653230623061333636646331346538333233656436393764
+  tasks:
+    - name: Send email using ansible
+      mail:
+        host: smtp.gmail.com
+        port: 587  
+        username: "aravindezhil97@gmail.com"
+        password: "{{gmail_password}}" 
+        to: "aravindezhil97@gmail.com"
+        subject: "Test Email from Ansible"
+        attach: /tmp/sample.txt
+        body: "This is a test email sent from Ansible."
+        secure: starttls  
+
